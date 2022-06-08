@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const defaultAmountCourseSelect = "UAH";
 const defaultCalculatedCourseSelect = "UAH";
@@ -23,6 +23,10 @@ function CoursesCalculate(props) {
   const [buyCourseFormSelect, setBuyCourseFormSelect] = useState(
     defaultCalculatedCourseSelect
   );
+
+  // Refs
+  const saleSelectRef = useRef(defaultAmountCourseSelect);
+  const buySelectRef = useRef(defaultCalculatedCourseSelect);
 
   function calculateAmountInput(inputValue) {
     const buySelect = buyCourseFormSelect;
@@ -78,6 +82,28 @@ function CoursesCalculate(props) {
     setBuyCourseFormSelect(inputValue);
   }
 
+  // Handlers: Form switch course
+  function switchCourseHandler() {
+    const saleSelect = saleCourseFormSelect;
+    const buySelect = buyCourseFormSelect;
+
+    const selectOptions = [];
+    for (const element of saleSelectRef.current.options) {
+      selectOptions.push(element.innerText);
+    }
+
+    const selectedSaleIndex = selectOptions.findIndex(
+      (el) => el === saleSelect
+    );
+    const selectedBuyIndex = selectOptions.findIndex((el) => el === buySelect);
+
+    saleSelectRef.current.selectedIndex = selectedBuyIndex;
+    buySelectRef.current.selectedIndex = selectedSaleIndex;
+
+    setSaleCourseFormSelect(buySelect);
+    setBuyCourseFormSelect(saleSelect);
+  }
+
   useEffect(() => {
     calculateAmountInput(saleFormValue);
   }, [saleFormValue, saleCourseFormSelect, buyCourseFormSelect]);
@@ -90,6 +116,7 @@ function CoursesCalculate(props) {
           onChange={handlerSaleSelect}
           className="form-control"
           id="exampleFormControlSelect1"
+          ref={saleSelectRef}
         >
           <option>UAH</option>
           <option>USD</option>
@@ -102,13 +129,18 @@ function CoursesCalculate(props) {
           onChange={handlerAmountInput}
         />
       </div>
-      <img className="mx-3" src="changeIcon.svg" />
+      <img
+        onClick={switchCourseHandler}
+        className="mx-3"
+        src="changeIcon.svg"
+      />
       <div>
         <div className="h4">To buy</div>
         <select
           onChange={handlerBuySelect}
           className="form-control"
           id="exampleFormControlSelect1"
+          ref={buySelectRef}
         >
           <option>UAH</option>
           <option>USD</option>
