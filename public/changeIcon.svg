@@ -1,0 +1,19 @@
+<svg tabindex="0" class="switch-currencies" xmlns="http://www.w3.org/2000/svg" width="20" height="14" viewBox="0 0 20 14">
+    <g fill-rule="evenodd" transform="translate(0 -1)">
+        <g transform="translate(2)">
+            <rect width="16" height="1" y="4"></rect>
+            <g transform="rotate(-135 8.586 1.15)">
+                <rect width="1" height="5"></rect>
+                <rect width="1" height="5" x="2" y="2" transform="rotate(90 2.5 4.5)"></rect>
+            </g>
+        </g>
+        <g transform="rotate(-180 9 8)">
+            <rect width="16" height="1" y="4"></rect>
+            <g transform="rotate(-135 8.586 1.15)">
+                <rect width="1" height="5"></rect>
+                <rect width="1" height="5" x="2" y="2" transform="rotate(90 2.5 4.5)"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
+
